@@ -9,5 +9,6 @@
  */
 
 
-/* A generic swap function */
-void swap(void *, void *);
+/* A simple swap function for integers */
+void swap(int *, int *);
+void print_array(int *array, int length);

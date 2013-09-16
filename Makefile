@@ -9,3 +9,6 @@ array.o: array.h array.c util.o
 
 matrix.o: matrix.h matrix.c array.o
 	$(CC) $(OPTIONS) -c matrix.c
+
+test/array: test/array.c array.o
+	$(CC) $(OPTIONS) -o test/array.out test/array.c util.o

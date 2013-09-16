@@ -6,4 +6,5 @@
 
  */
 
-void insert(void *array, void *insertee);
+void insert(int *array,   int array_size,
+            int insertee, int position);
