@@ -7,8 +7,14 @@ util.o: util.c util.h
 array.o: array.h array.c util.o
 	$(CC) $(OPTIONS) -c array.c
 
-matri.o: matrix.h matrix.c array.o
+matrix.o: matrix.h matrix.c array.o
 	$(CC) $(OPTIONS) -c matrix.c
+
+sort.o: sort.h sort.c array.o
+	$(CC) $(OPTIONS) -c sort.c
 
 test/array.out: test/array.test.c array.o
 	$(CC) $(OPTIONS) -o test/array.out test/array.test.c array.o
+
+test/sort.out: test/sort.test.c sort.o util.o array.o
+	$(CC) $(OPTIONS) -o test/sort.out test/sort.test.c sort.o array.o util.o

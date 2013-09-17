@@ -20,11 +20,11 @@ void left_rotate_subarray(int *array, int length, int start, int end) {
 
     assert(start <= end);
 
-    int last_element = array[end];
+    int subarray_last_element = array[end];
 
     for (int i = end; i > start; --i) {
         array[i] = array[i - 1];
     }
 
-    array[start] = last_element;
+    array[start] = subarray_last_element;
 }
