@@ -37,11 +37,5 @@ int main() {
     reverse_array(d, 5);
     print_array(d, 5);
 
-    int e[] = {34, 54, -4, 634, 3, 2, 65, 43};
-    printf("Minimum element:\n");
-    print_array(e, 8);
-    int min_index = find_minimum_in_subarray(e, 8, 0, 7);
-    printf("Min: array[%d]: %d\n", min_index, e[min_index]);
-
     return 0;
 }

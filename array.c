@@ -34,16 +34,3 @@ void left_rotate_subarray(int *array, int length, int start, int end) {
 
     array[start] = subarray_last_element;
 }
-
-int find_minimum_in_subarray(int *array, int length, int start, int end) {
-    int minimum_index = 0;
-    assert(length >= end);
-
-    for (int i = start; i <= end; ++i) {
-        if (array[i] < array[minimum_index]) {
-            minimum_index = i;
-        }
-    }
-
-    return minimum_index + start;
-}
