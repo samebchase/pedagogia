@@ -28,15 +28,24 @@ void insertion_sort(int *array, int length) {
     }
 }
 
-void selection_sort(int *array, int length) {
-    int i, j, min_index = 0;
-    for (i = 0; i < length - 1; ++i) {
-        min_index = i;
-        for (j = i + 1; j < length; ++j) {
-            if (array[j] < array[min_index]) {
-                min_index = j;
-            }
+int find_minimum_index(int *array, int length,
+                       int start_index, int end_index) {
+    assert(end_index < length);
+    int min_index = start_index;
+
+    for (int i = start_index; i <= end_index; ++i) {
+        if (array[i] < array[min_index]) {
+            min_index = i;
         }
+    }
+
+    return min_index;
+}
+
+void selection_sort(int *array, int length) {
+    int i, min_index;
+    for (i = 0; i < length - 1; ++i) {
+        min_index = find_minimum_index(array, length, i, length - 1);
         swap(&array[i], &array[min_index]);
     }
 }
