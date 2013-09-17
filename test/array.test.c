@@ -27,5 +27,15 @@ int main() {
         print_array(c, 5);
     }
 
+    printf("Reversing an array:\n");
+    print_array(a, 5);
+    reverse_array(a, 5);
+    print_array(a, 5);
+
+    int d[] = {8, 7, 6, 5, 4, 3};
+    print_array(d, 5);
+    reverse_array(d, 5);
+    print_array(d, 5);
+
     return 0;
 }

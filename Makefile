@@ -13,8 +13,8 @@ matrix.o: matrix.h matrix.c array.o
 sort.o: sort.h sort.c array.o
 	$(CC) $(OPTIONS) -c sort.c
 
-test/array.out: test/array.test.c array.o
-	$(CC) $(OPTIONS) -o test/array.out test/array.test.c array.o
+test/array.out: test/array.test.c array.o util.o
+	$(CC) $(OPTIONS) -o test/array.out test/array.test.c array.o util.o
 
 test/sort.out: test/sort.test.c sort.o util.o array.o
 	$(CC) $(OPTIONS) -o test/sort.out test/sort.test.c sort.o array.o util.o

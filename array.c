@@ -12,6 +12,12 @@ void print_array(int *array, int length) {
     printf("\n");
 }
 
+void reverse_array(int *array, int length) {
+    for (int i = 0; i < length / 2; ++i) {
+        swap(&array[i], &array[length - 1 - i]);
+    }
+}
+
 void left_rotate_array(int *array, int length) {
     left_rotate_subarray(array, length, 0, length - 1);
 }
