@@ -29,4 +29,8 @@ void insertion_sort(int *array, int length) {
 }
 
 void selection_sort(int *array, int length) {
+    for (int i = 0; i < length; i++) {
+        int min_index = find_minimum_in_subarray(array, length, i, length - 1);
+        swap(&array[i], &array[min_index]);
+    }
 }

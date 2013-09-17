@@ -6,6 +6,8 @@ int is_sorted(int *array, int length);
 
 void insertion_sort(int *array, int length);
 
+void selection_sort(int *array, int length);
+
 void bubble_sort(int *array, int length);
 
 void quicksort(int *array, int length);
