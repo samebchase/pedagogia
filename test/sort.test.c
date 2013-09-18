@@ -40,5 +40,23 @@ int main() {
     selection_sort(f, 5);
     print_array(f, 5);
 
+    int g[] = {5, -6, 67, -3, 0, 78, 123, -8, 42, -1};
+    int h[] = {123, -5, 0, 4, 69, -87, -2, 89, -12, -2};
+    int i[] = {1, 2, 3, 4, -1000};
+
+    printf("Bubble sort:\n");
+
+    print_array(g, 10);
+    bubble_sort(g, 10);
+    print_array(g, 10);
+
+    print_array(h, 10);
+    bubble_sort(h, 10);
+    print_array(h, 10);
+
+    print_array(i, 5);
+    bubble_sort(i, 5);
+    print_array(i, 5);
+
     return 0;
 }
