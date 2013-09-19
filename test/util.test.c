@@ -9,8 +9,10 @@ int main() {
     swap(&array[0], &array[1]);
     print_array(array, 2);
 
-    printf("Array generation:");
+    printf("Array generation:\n");
     int *foo = generate_array(16);
+    print_array(foo, 16);
+    randomise_array(foo, 16, -100, 100);
     print_array(foo, 16);
 
     return 0;

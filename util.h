@@ -20,4 +20,8 @@ int* generate_array(size_t length);
 
 int random_integer(int start, int end);
 
+void randomise_array(int *array, size_t length,
+                     int interval_begin, int interval_end);
+
+
     

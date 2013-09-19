@@ -1,3 +1,6 @@
+#include <math.h>
+#include <stdio.h>
+
 #include "util.h"
 
 void swap(int *a, int *b) {
@@ -21,13 +24,9 @@ int random_integer(int start, int end) {
     initialise_random_seed();
 
     float normalised_random_value = rand() / ((float) RAND_MAX + 1);
-    int range_width = end - start + 1;
-    float scaled_value = range_width * normalised_random_value;
-
-    int foo = ceil(3.434);
-    float sq = sqrt(3.14);
-
-    int retval = floor((double) scaled_value + start);
+    int   range_width             = end - start + 1;
+    float scaled_value            = range_width * normalised_random_value;
+    int   retval                  = floor((float) scaled_value + start);
 
     return retval;
 }
@@ -35,4 +34,11 @@ int random_integer(int start, int end) {
 int* generate_array(size_t length) {
     int *array = malloc(sizeof(int) * length);
     return array;
+}
+
+void randomise_array(int *array, size_t length,
+                     int interval_begin, int interval_end) {
+    for (size_t i = 0; i < length; ++i) {
+        array[i] = random_integer(interval_begin, interval_end);
+    }
 }
