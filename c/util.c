@@ -20,7 +20,6 @@ void initialise_random_seed() {
 }
 
 int random_integer(int start, int end) {
-
     initialise_random_seed();
 
     float normalised_random_value = rand() / ((float) RAND_MAX + 1);

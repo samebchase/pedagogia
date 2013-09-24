@@ -37,5 +37,8 @@ int main() {
     reverse_array(d, 5);
     print_array(d, 5);
 
+    printf("Recursive procedure to print array:\n");
+    print_array_rec(d, 5);
+
     return 0;
 }

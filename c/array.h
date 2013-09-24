@@ -22,3 +22,5 @@ void left_rotate_array(int *array, int length);
 
 void left_rotate_subarray(int *array, int length,
                           int start, int end);
+
+void print_array_rec(int *array, int length);
