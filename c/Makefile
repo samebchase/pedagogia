@@ -1,7 +1,7 @@
-CC=gcc
+CC=clang
 OPTIONS=-g -std=c99
 
-all: test/util.out test/array.out test/sort.out
+all: test/util.out test/array.out test/sort.out test/search.out
 
 util.o: util.c util.h
 	$(CC) $(OPTIONS) -c util.c
@@ -15,6 +15,9 @@ matrix.o: matrix.h matrix.c array.o
 sort.o: sort.h sort.c array.o
 	$(CC) $(OPTIONS) -c sort.c
 
+search.o: search.h search.c array.o
+	$(CC) $(OPTIONS) -c search.c
+
 test/util.out: test/util.test.c util.o array.o
 	$(CC) $(OPTIONS) -o test/util.out util.o array.o test/util.test.c -lm
 
@@ -23,6 +26,9 @@ test/array.out: test/array.test.c array.o util.o
 
 test/sort.out: test/sort.test.c sort.o util.o array.o
 	$(CC) $(OPTIONS) -o test/sort.out sort.o array.o util.o test/sort.test.c -lm
+
+test/search.out: test/search.test.c search.o array.o util.o
+	$(CC) $(OPTIONS) -o test/search.out search.o array.o util.o test/search.test.c -lm
 
 clean:
 	rm test/*.out *.o

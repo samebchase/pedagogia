@@ -18,12 +18,6 @@ void print_array(int *array, int length) {
 
 */
 
-void print_array_rec(int *array, int length) {
-    printf("[");
-    print_array_rec_helper(array, length);
-    printf("]\n", *array);
-}
-
 void print_array_rec_helper(int *array, int length) {
     if (length <= 0) {
         return;
@@ -37,6 +31,12 @@ void print_array_rec_helper(int *array, int length) {
         printf("%d, ", *array);
         print_array_rec_helper(array + 1, length - 1);
     }
+}
+
+void print_array_rec(int *array, int length) {
+    printf("[");
+    print_array_rec_helper(array, length);
+    printf("]\n");
 }
 
 void reverse_array(int *array, int length) {
