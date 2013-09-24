@@ -37,5 +37,17 @@ int main() {
         printf("Element %d is not in the array.\n", search[1]);
     }
 
+    printf("Binary search:\n");
+
+    int sorted_array[] = {3, 4, 5, 7, 8, 9, 10, 20, 40, 42};
+
+    printf("Searching for element: %d\n", 8);
+    printf("8 is at: a[%d]\n", binary_search(sorted_array, 8, 0, 9));
+
+    printf("Searching for element: %d\n", 6);
+    if (binary_search(sorted_array, 6, 0, 9)) {
+        printf("Element %d is not in the array.\n", 6);
+    }
+
     return 0;
 }
