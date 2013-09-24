@@ -19,24 +19,23 @@ void print_array(int *array, int length) {
 */
 
 void print_array_rec(int *array, int length) {
-    static bool first_call = true;
+    printf("[");
+    print_array_rec_helper(array, length);
+    printf("]\n", *array);
+}
 
-    if (first_call) {
-        printf("[");
-        first_call = false;
-    }
-
-    if (length == 0) {
+void print_array_rec_helper(int *array, int length) {
+    if (length <= 0) {
         return;
     }
 
     else if (length == 1) {
-        printf("%d]\n", *array);
+        printf("%d", *array);
     }
 
     else {
         printf("%d, ", *array);
-        print_array_rec(array + 1, length - 1);
+        print_array_rec_helper(array + 1, length - 1);
     }
 }
 
