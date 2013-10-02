@@ -1,7 +1,10 @@
 CC=clang
 OPTIONS=-g -std=c99
 
-all: test/util.out test/array.out test/sort.out test/search.out
+all: test/util.out test/array.out test/sort.out test/search.out test/singly-linked-list.out
+
+linked-list.o: linked-list.h linked-list.c
+	$(CC) $(OPTIONS) -c linked-list.c
 
 util.o: util.c util.h
 	$(CC) $(OPTIONS) -c util.c
@@ -17,6 +20,9 @@ sort.o: sort.h sort.c array.o
 
 search.o: search.h search.c array.o
 	$(CC) $(OPTIONS) -c search.c
+
+test/singly-linked-list.out: test/singly-linked-list.test.c linked-list.o
+	$(CC) $(OPTIONS) -o test/singly-linked-list.out linked-list.o test/singly-linked-list.test.c
 
 test/util.out: test/util.test.c util.o array.o
 	$(CC) $(OPTIONS) -o test/util.out util.o array.o test/util.test.c -lm
