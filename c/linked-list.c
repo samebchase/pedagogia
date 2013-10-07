@@ -5,7 +5,7 @@
 
 singly_linked_list* new_singly_linked_list() {
     singly_linked_list *list = malloc(sizeof(singly_linked_list));
-    list->head = new_singly_linked_node();
+    list->head = NULL;
     return list;
 }
 
@@ -19,7 +19,7 @@ singly_linked_node* new_singly_linked_node() {
 }
 
 bool is_empty(singly_linked_list *list) {
-    if (list->head->next == NULL)
+    if (list->head == NULL)
         return true;
     else
         return false;
@@ -31,7 +31,7 @@ size_t list_length(singly_linked_list *list) {
     }
     else {
         size_t length;
-        singly_linked_node *iterator = list->head->next;
+        singly_linked_node *iterator = list->head;
         for (length = 1; iterator->next != NULL; ++length, iterator = iterator->next) {}
         return length;
     }
@@ -42,7 +42,7 @@ void print_singly_linked_list(singly_linked_list *list) {
         printf("[]");
     }
     else  {
-        singly_linked_node *iterator = list->head->next;
+        singly_linked_node *iterator = list->head;
         printf("[");
 
         while (iterator->next != NULL) {
@@ -65,8 +65,8 @@ singly_linked_node* list_end(singly_linked_list *list) {
 void push(singly_linked_list *list, int data) {
     singly_linked_node *new_node = new_singly_linked_node();
     new_node->data = data;
-    new_node->next = list->head->next;
-    list->head->next = new_node;
+    new_node->next = list->head;
+    list->head = new_node;
 }
 
 int pop(singly_linked_list *list) {
@@ -75,10 +75,10 @@ int pop(singly_linked_list *list) {
         exit(1);
     }
     else {
-        singly_linked_node *temp = list->head->next;
+        singly_linked_node *temp = list->head;
         int value = temp->data;
 
-        list->head->next = temp->next;
+        list->head = temp->next;
         free(temp);
 
         return value;
@@ -94,3 +94,11 @@ void append(singly_linked_list *list, int data) {
     end = list_end(list);
     end->next = appendee;
 }
+
+void insert(singly_linked_list *list, int index, int data) {}
+
+void slice(singly_linked_list *list, int start_index, int end_index) {}
+
+void reverse(singly_linked_list *list) {}
+
+void sort(singly_linked_list *list, int (*cmp)(int a, int b)) {}
