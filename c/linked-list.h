@@ -23,6 +23,8 @@ singly_linked_node* list_end(singly_linked_list*);
 
 void push(singly_linked_list *list, int data);
 
+int pop(singly_linked_list *list);
+
 void append(singly_linked_list*, int);
 
 void print_singly_linked_list(singly_linked_list *);

@@ -32,5 +32,16 @@ int main() {
     print_singly_linked_list(list_a);
     printf("\n");
 
+    for (int i = 0; i < 5; ++i) {
+        printf("Pop: %d\n", pop(list_a));
+    }
+
+    print_singly_linked_list(list_a);
+    printf("\n");
+
+    singly_linked_list *empty = new_singly_linked_list();
+
+    pop(empty);
+
     return 0;
 }

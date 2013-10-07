@@ -37,13 +37,6 @@ size_t list_length(singly_linked_list *list) {
     }
 }
 
-void push(singly_linked_list *list, int data) {
-    singly_linked_node *new_node = new_singly_linked_node();
-    new_node->data = data;
-    new_node->next = list->head->next;
-    list->head->next = new_node;
-}
-
 void print_singly_linked_list(singly_linked_list *list) {
     if (is_empty(list)) {
         printf("[]");
@@ -67,6 +60,29 @@ singly_linked_node* list_end(singly_linked_list *list) {
     for (iterator = list->head; iterator->next != NULL; iterator = iterator->next) {}
     end = iterator;
     return end;
+}
+
+void push(singly_linked_list *list, int data) {
+    singly_linked_node *new_node = new_singly_linked_node();
+    new_node->data = data;
+    new_node->next = list->head->next;
+    list->head->next = new_node;
+}
+
+int pop(singly_linked_list *list) {
+    if (is_empty(list)) {
+        fprintf(stderr, "[ERROR]: Pop from empty list\n");
+        exit(1);
+    }
+    else {
+        singly_linked_node *temp = list->head->next;
+        int value = temp->data;
+
+        list->head->next = temp->next;
+        free(temp);
+
+        return value;
+    }
 }
 
 void append(singly_linked_list *list, int data) {
