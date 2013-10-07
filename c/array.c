@@ -14,7 +14,8 @@ void print_array(int *array, int length) {
 
 /*
 
-  WARNING: Pedagogic proof-of-concept code.
+  WARNING: print_array_rec() is proof-of-concept code. See
+  print_array() for a better way of doing the same thing.
 
 */
 
@@ -45,14 +46,14 @@ void reverse_array(int *array, int length) {
     }
 }
 
+void reverse_array_rec(int *array, int length);
+
 void left_rotate_array(int *array, int length) {
     left_rotate_subarray(array, length, 0, length - 1);
 }
 
 void left_rotate_subarray(int *array, int length, int start, int end) {
-
     assert(start <= end);
-
     int subarray_last_element = array[end];
 
     for (int i = end; i > start; --i) {

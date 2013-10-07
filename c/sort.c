@@ -3,11 +3,13 @@
 #include "util.h"
 
 int is_sorted(int *array, size_t length) {
+    // TODO: Make is_sorted() more generic to accept arbitrary comparison functions.
     int sorted_flag = 1;
 
     for (size_t i = 0; i < length - 1; ++i) {
         if (array[i + 1] < array[i]) {
             sorted_flag = 0;
+            break;
         }
     }
 
@@ -57,3 +59,14 @@ void bubble_sort(int *array, size_t length) {
         }
     }
 }
+
+/*
+  Partitions array into two subarrays and returns the new index of the
+  pivot.
+*/
+
+/* size_t partition(size_t start, size_t end, size_t pivot_index) { */
+/* } */
+
+/* void quicksort(int *array, size_t start, size_t end) { */
+/* } */
