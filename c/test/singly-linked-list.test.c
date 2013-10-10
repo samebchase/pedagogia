@@ -40,8 +40,35 @@ int main() {
     printf("\n");
 
     singly_linked_list *empty = new_singly_linked_list();
+    singly_linked_list *sorted_list = new_singly_linked_list();
 
-    pop(empty);
+    for (int i = 20; i > 10; --i) {
+        push(sorted_list, i);
+    }
+
+    printf("Sorted list: ");
+    print_singly_linked_list(sorted_list);
+    printf("\n");
+
+    printf("Insert 1984 at list[3]: ");
+    insert(sorted_list, 3, 1984);
+    print_singly_linked_list(sorted_list);
+    printf("\n");
+
+    printf("Insert 2199 at list[0]: ");
+    insert(sorted_list, 0, 2199);
+    print_singly_linked_list(sorted_list);
+    printf("\n");
+
+    printf("Insert 9999 at list[12]: ");
+    insert(sorted_list, 12, 9999);
+    print_singly_linked_list(sorted_list);
+    printf("\n");
+
+    printf("Insert into empty list: ");
+    insert(empty, 0, 12345);
+    print_singly_linked_list(empty);
+    printf("\n");
 
     return 0;
 }

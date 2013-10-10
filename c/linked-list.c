@@ -1,21 +1,26 @@
 #include <stdio.h>
+#include <assert.h>
 #include <stdlib.h>
 
 #include "linked-list.h"
 
 singly_linked_list* new_singly_linked_list() {
     singly_linked_list *list = malloc(sizeof(singly_linked_list));
+    assert(list);
+
     list->head = NULL;
     return list;
 }
 
-void free_list(singly_linked_list *list) {
-}
-
 singly_linked_node* new_singly_linked_node() {
     singly_linked_node *new_node = malloc(sizeof(singly_linked_node));
+    assert(new_node);
+
     new_node->next = NULL;
     return new_node;
+}
+
+void free_list(singly_linked_list *list) {
 }
 
 bool is_empty(singly_linked_list *list) {
@@ -95,7 +100,38 @@ void append(singly_linked_list *list, int data) {
     end->next = appendee;
 }
 
-void insert(singly_linked_list *list, int index, int data) {}
+void insert(singly_linked_list *list, int index, int data) {
+    singly_linked_node *new_node = new_singly_linked_node();
+    new_node->data = data;
+
+    if (is_empty(list))  {
+        if (index == 0) {
+            list->head = new_node;
+        }
+        else {
+            fprintf(stderr, "[ERROR]: List is empty. Invalid index.\n");
+            exit(1);
+        }
+    }
+    else {
+        singly_linked_node *iterator;
+        int i = 0;
+
+        for (iterator = list->head;
+             iterator->next != NULL && i < index - 1;
+             iterator = iterator->next, ++i) {}
+
+        if (i < index - 1) {
+            fprintf(stderr, "[ERROR]: Index out of range.\n");
+            exit(1);
+        }
+
+        new_node->next = iterator->next;
+        iterator->next = new_node;
+    }
+}
+
+void delete(singly_linked_list *list, int index) {}
 
 void slice(singly_linked_list *list, int start_index, int end_index) {}
 

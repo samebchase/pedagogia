@@ -27,4 +27,6 @@ int pop(singly_linked_list *list);
 
 void append(singly_linked_list*, int);
 
+void insert(singly_linked_list *list, int index, int data);
+
 void print_singly_linked_list(singly_linked_list *);
