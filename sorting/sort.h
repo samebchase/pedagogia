@@ -1,6 +1,7 @@
 #pragma once
 
-#include "util.h"
+#include "../arrays/array.h"
+#include "../util/util.h"
 
 int is_sorted(int *array, size_t length);
 

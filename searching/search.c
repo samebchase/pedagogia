@@ -1,5 +1,5 @@
 #include <limits.h>
-#include "array.h"
+#include <stddef.h>
 
 /*
  -(INT_MAX / 2) shall henceforth be used as a large negative integer,

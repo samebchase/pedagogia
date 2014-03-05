@@ -1,40 +1,50 @@
 CC=clang
-OPTIONS=-g -std=c99
+OPTIONS=-g -Wall -pedantic -std=c99
 
-all: test/util.out test/array.out test/sort.out test/search.out test/singly-linked-list.out
+AR=arrays
+L=lib
+LL=linked-lists
+SE=searching
+SO=sorting
+T=test
+U=util
 
-linked-list.o: linked-list.h linked-list.c
-	$(CC) $(OPTIONS) -c linked-list.c
+all: $(T)/util.out $(T)/array.out $(T)/sort.out $(T)/search.out $(T)/singly-linked-list.out
 
-util.o: util.c util.h
-	$(CC) $(OPTIONS) -c util.c
 
-array.o: array.h array.c util.o
-	$(CC) $(OPTIONS) -c array.c
+lib/util.o: $(U)/util.c $(U)/util.h
+	$(CC) $(OPTIONS) -c $(U)/util.c -o $(L)/util.o
 
-matrix.o: matrix.h matrix.c array.o
-	$(CC) $(OPTIONS) -c matrix.c
+test/util.out: $(T)/util.test.c $(L)/util.o $(L)/array.o
+	$(CC) $(OPTIONS) -o $(T)/util.out $(L)/util.o $(L)/array.o $(T)/util.test.c -lm
 
-sort.o: sort.h sort.c array.o
-	$(CC) $(OPTIONS) -c sort.c
+lib/linked-list.o: $(LL)/linked-list.h $(LL)/linked-list.c
+	$(CC) $(OPTIONS) -c $(LL)/linked-list.c -o $(L)/linked-list.o
 
-search.o: search.h search.c array.o
-	$(CC) $(OPTIONS) -c search.c
+test/singly-linked-list.out: $(T)/singly-linked-list.test.c $(L)/linked-list.o
+	$(CC) $(OPTIONS) -o $(T)/singly-linked-list.out $(L)/linked-list.o $(T)/singly-linked-list.test.c
 
-test/singly-linked-list.out: test/singly-linked-list.test.c linked-list.o
-	$(CC) $(OPTIONS) -o test/singly-linked-list.out linked-list.o test/singly-linked-list.test.c
 
-test/util.out: test/util.test.c util.o array.o
-	$(CC) $(OPTIONS) -o test/util.out util.o array.o test/util.test.c -lm
+lib/array.o: $(AR)/array.h $(AR)/array.c $(L)/util.o
+	$(CC) $(OPTIONS) -c $(AR)/array.c -o $(L)/array.o
 
-test/array.out: test/array.test.c array.o util.o
-	$(CC) $(OPTIONS) -o test/array.out array.o util.o test/array.test.c -lm
+test/array.out: $(T)/array.test.c $(L)/array.o $(L)/util.o
+	$(CC) $(OPTIONS) -o $(T)/array.out $(L)/array.o $(L)/util.o $(T)/array.test.c -lm
 
-test/sort.out: test/sort.test.c sort.o util.o array.o
-	$(CC) $(OPTIONS) -o test/sort.out sort.o array.o util.o test/sort.test.c -lm
 
-test/search.out: test/search.test.c search.o array.o util.o
-	$(CC) $(OPTIONS) -o test/search.out search.o array.o util.o test/search.test.c -lm
+lib/sort.o: $(SO)/sort.h $(SO)/sort.c $(L)/array.o
+	$(CC) $(OPTIONS) -c $(SO)/sort.c -o $(L)/sort.o
+
+test/sort.out: $(T)/sort.test.c $(L)/sort.o $(L)/util.o $(L)/array.o
+	$(CC) $(OPTIONS) -o $(T)/sort.out $(L)/sort.o $(L)/array.o $(L)/util.o $(T)/sort.test.c -lm
+
+
+lib/search.o: $(SE)/search.h $(SE)/search.c $(L)/array.o
+	$(CC) $(OPTIONS) -c $(SE)/search.c -o $(L)/search.o
+
+test/search.out: $(T)/search.test.c $(L)/search.o $(L)/array.o $(L)/util.o
+	$(CC) $(OPTIONS) -o $(T)/search.out $(L)/search.o $(L)/array.o $(L)/util.o $(T)/search.test.c -lm
+
 
 clean:
-	rm test/*.out *.o
+	rm test/*.out lib/*.o

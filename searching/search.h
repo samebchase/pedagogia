@@ -1,6 +1,6 @@
 #pragma once
 
-#include "array.h"
+#include "../arrays/array.h"
 
 int linear_search(int *array, int length, int element);
 

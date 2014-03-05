@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <assert.h>
 
-#include "util.h"
+#include "../util/util.h"
 
 /*
 

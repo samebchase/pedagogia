@@ -1,6 +1,4 @@
 #include "sort.h"
-#include "array.h"
-#include "util.h"
 
 int is_sorted(int *array, size_t length) {
     // TODO: Make is_sorted() more generic to accept arbitrary comparison functions.
