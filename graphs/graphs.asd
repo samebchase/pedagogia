@@ -14,5 +14,7 @@
                #:optima
                #:fiveam)
   :components ((:file "package")
+               (:file "node")
+               (:file "edge")
                (:file "graphs")))
 
