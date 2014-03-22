@@ -30,9 +30,9 @@ Quicklisp.
     (incf (size hash-set))))
 
 (defun hs-delete (hash-set item)
-  (unless (hs-memberp hash-set item)
-    (push item (gethash item (table hash-set)))
-    (incf (size hash-set))))
+  (when (hs-memberp hash-set item)
+    (remhash item (table hash-set))
+    (decf (size hash-set))))
 
 (defun hs-count (hash-set)
   (size hash-set))  
