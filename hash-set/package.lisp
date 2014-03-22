@@ -5,8 +5,12 @@
 (defpackage #:hash-set
   (:use #:cl)
   (:export #:hash-set
+           #:list-to-hs
+           #:hs-equal
            #:hs-memberp
            #:hs-insert
+           #:hs-delete
+           #:hs-map
            #:hs-count
            #:hs-union
            #:hs-intersection

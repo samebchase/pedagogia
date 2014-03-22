@@ -12,6 +12,15 @@ Quicklisp.
    (size  :accessor size :initform 0))
   (:documentation "A hashset."))
 
+(defun list-to-hs (list)
+  (let ((hash-set (make-instance 'hash-set)))
+    (loop for elt in list do
+         (hs-insert hash-set elt))
+    hash-set))
+
+(defun hs-equal (hs-a hs-b)
+  nil)
+
 (defun hs-memberp (hash-set item)
   (gethash item (table hash-set)))
 
@@ -19,20 +28,29 @@ Quicklisp.
   (unless (hs-memberp hash-set item)
     (push item (gethash item (table hash-set)))
     (incf (size hash-set))))
-    
+
+(defun hs-delete (hash-set item)
+  (unless (hs-memberp hash-set item)
+    (push item (gethash item (table hash-set)))
+    (incf (size hash-set))))
+
 (defun hs-count (hash-set)
   (size hash-set))  
 
-(defun hs-union (hash-set)
+
+(defun hs-map (hash-set function)
 nil)
 
-(defun hs-intersection (hash-set)
+(defun hs-union (hs-a hs-b)
 nil)
 
-(defun hs-cartesian-product (hash-set)
+(defun hs-intersection (hs-a hs-b)
 nil)
 
-(defun hs-symmetric-difference (hash-set)
+(defun hs-cartesian-product (hs-a hs-b)
+nil)
+
+(defun hs-symmetric-difference (hs-a hs-b)
 nil)
 
 (defmethod print-object ((hash-set hash-set) stream)

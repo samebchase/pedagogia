@@ -14,8 +14,9 @@
 
 (test hs-count
   (let ((hash-set (make-instance 'hash-set)))
-    (dotimes (i 10)
-      (hs-insert hash-set i))
+    (loop repeat 3 do
+         (dotimes (i 10)
+           (hs-insert hash-set i)))
     (is (= 10 (hs-count hash-set)))))
       
 
