@@ -3,8 +3,18 @@
 (in-package :cl-user)
 
 (defpackage #:hash-set
-  (:use #:cl))
+  (:use #:cl)
+  (:export #:hash-set
+           #:hs-memberp
+           #:hs-insert
+           #:hs-count
+           #:hs-union
+           #:hs-intersection
+           #:hs-cartesian-product
+           #:hs-symmetric-difference
+           #:hs-pretty-print))
 
 (defpackage #:hash-set-test
   (:use #:cl
-        #:fiveam))
+        #:fiveam
+        #:hash-set))

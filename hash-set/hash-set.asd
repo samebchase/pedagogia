@@ -14,5 +14,6 @@
                #:optima
                #:fiveam)
   :components ((:file "package")
-               (:file "hash-set")))
+               (:file "hash-set")
+               (:file "test")))
 

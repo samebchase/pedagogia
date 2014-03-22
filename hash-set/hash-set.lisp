@@ -1,13 +1,22 @@
+(in-package :hash-set)
+
+#|
+
+Engineering guidance taken from the map-set library installable by
+Quicklisp.
+
+|#
+
 (defclass hash-set ()
   ((table :accessor table :initform (make-hash-table))
    (size  :accessor size :initform 0))
   (:documentation "A hashset."))
 
-(defun memberp (hash-set item)
-  (nth-value 1 (gethash item (table hash-set))))
+(defun hs-memberp (hash-set item)
+  (gethash item (table hash-set)))
 
-(defun insert (hash-set item)
-  (unless (memberp hash-set item)
+(defun hs-insert (hash-set item)
+  (unless (hs-memberp hash-set item)
     (push item (gethash item (table hash-set)))
     (incf (size hash-set))))
     
@@ -26,13 +35,13 @@ nil)
 (defun hs-symmetric-difference (hash-set)
 nil)
 
-(defmethod print-object ((set hash-set) stream)
-  (print-unreadable-object (set stream :identity t :type t)
-    (format stream "of count: ~a" (size set))))
+(defmethod print-object ((hash-set hash-set) stream)
+  (print-unreadable-object (hash-set stream :identity t :type t)
+    (format stream "of count: ~a" (hs-count hash-set))))
 
 (defun hs-pretty-print (hash-set)
   (let ((count (hs-count hash-set)))
-    (with-hash-table-iterator (iterator (table set))
+    (with-hash-table-iterator (iterator (table hash-set))
       (format t "{")
       (loop for i from 1 to count do
            (let ((key (nth-value 1 (iterator))))
