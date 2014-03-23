@@ -18,9 +18,6 @@ Quicklisp.
          (hs-insert hash-set elt))
     hash-set))
 
-(defun hs-equal (hs-a hs-b)
-  nil)
-
 (defun hs-memberp (hash-set item)
   (gethash item (table hash-set)))
 
@@ -67,7 +64,14 @@ Quicklisp.
     result))
 
 (defun hs-equal (hs-a hs-b)
-  nil)
+  (if (/= (hs-count hs-a) (hs-count hs-b))
+      nil
+      (with-hash-table-iterator (iterator (table hs-a))
+        (loop for i from 1 to (hs-count hs-a) do
+             (let ((value (nth-value 1 (iterator))))
+               (unless (hs-memberp hs-b value)
+                 (return nil))))
+        t)))
 
 (defun hs-cartesian-product (hs-a hs-b)
 nil)

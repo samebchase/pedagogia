@@ -29,6 +29,21 @@
     (hs-delete hash-set 15)
     (is (= 90 (hs-count hash-set)))))
 
+(test hs-equality
+  (let ((hs-a (list-to-hs (alexandria:iota 10)))
+        (hs-b (list-to-hs (alexandria:iota 10)))
+        (hs-c (list-to-hs (alexandria:iota 20)))
+        (hs-d (list-to-hs (alexandria:iota 10 :start 10))))
+    (is (hs-equal hs-a hs-b))
+    (is-false (hs-equal hs-b hs-c))
+    (is-false (hs-equal hs-c hs-d))))
+
+        
+        
+        
+      
+    
+
     
     
     
