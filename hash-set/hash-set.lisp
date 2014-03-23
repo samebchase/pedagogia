@@ -37,15 +37,37 @@ Quicklisp.
 (defun hs-count (hash-set)
   (size hash-set))  
 
-
-(defun hs-map (hash-set function)
-nil)
+(defun hs-map (hash-set fn)
+  (let ((result (make-instance 'hash-set)))
+    (with-hash-table-iterator (iterator (table hash-set))
+      (loop for i from 1 to (hs-count hash-set) do
+           (let ((value (nth-value 1 (iterator))))
+             (hs-insert result (funcall fn value)))))
+    result))
 
 (defun hs-union (hs-a hs-b)
-nil)
-
+  (let ((count-a (hs-count hs-a))
+        (count-b (hs-count hs-b))
+        (result (make-instance 'hash-set)))
+    (with-hash-table-iterator (iterator (table hs-a))
+      (loop for i from 1 to count-a do
+           (hs-insert result (nth-value 1 (iterator)))))
+    (with-hash-table-iterator (iterator (table hs-b))
+      (loop for i from 1 to count-b do
+           (hs-insert result (nth-value 1 (iterator)))))
+    result))
+    
 (defun hs-intersection (hs-a hs-b)
-nil)
+  (let ((result (make-instance 'hash-set)))
+    (with-hash-table-iterator (iterator (table hs-a))
+      (loop for i from 1 to (hs-count hs-a) do
+           (let ((value (nth-value 1 (iterator))))
+             (when (hs-memberp hs-b value)
+               (hs-insert result value)))))
+    result))
+
+(defun hs-equal (hs-a hs-b)
+  nil)
 
 (defun hs-cartesian-product (hs-a hs-b)
 nil)
@@ -61,9 +83,8 @@ nil)
   (let ((count (hs-count hash-set)))
     (with-hash-table-iterator (iterator (table hash-set))
       (format t "{")
-      (loop for i from 1 to count do
-           (let ((key (nth-value 1 (iterator))))
-             (if (< i count)
-                 (format t "~a, " key)
-                 (format t "~a}" key)))))))
+      (loop for i from 1 to (1- count) do
+           (let ((value (nth-value 1 (iterator))))
+             (format t "~a, " value)))
+      (format t "~a}" (nth-value 1 (iterator))))))
    
