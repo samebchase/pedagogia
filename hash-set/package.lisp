@@ -6,6 +6,7 @@
   (:use #:cl)
   (:export #:hash-set
            #:list-to-hs
+           #:hs-copy
            #:hs-equal
            #:hs-memberp
            #:hs-insert
@@ -15,6 +16,7 @@
            #:hs-union
            #:hs-intersection
            #:hs-cartesian-product
+           #:hs-difference
            #:hs-symmetric-difference
            #:hs-pretty-print))
 

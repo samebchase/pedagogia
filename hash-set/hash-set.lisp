@@ -2,8 +2,8 @@
 
 #|
 
-Engineering guidance taken from the map-set library installable by
-Quicklisp.
+Engineering guidance taken from Robert Smith's map-set library that
+can be installed using Quicklisp.
 
 |#
 
@@ -76,8 +76,24 @@ Quicklisp.
 (defun hs-cartesian-product (hs-a hs-b)
 nil)
 
+(defun hs-copy (hash-set)
+  (let ((copy (make-instance 'hash-set)))
+    (with-hash-table-iterator (iterator (table hash-set))
+      (loop for i from 1 to (hs-count hash-set) do
+           (hs-insert copy (nth-value 1 (iterator)))))
+    copy))
+
+(defun hs-difference (hs-a hs-b)
+  (let ((result (hs-copy hs-a)))
+    (with-hash-table-iterator (iterator (table hs-b))
+      (loop for i from 1 to (hs-count hs-b) do
+           (let ((value (nth-value 1 (iterator))))
+             (hs-delete result value))))
+    result))
+
 (defun hs-symmetric-difference (hs-a hs-b)
-nil)
+  (let ((result (make-instance 'hash-set)))
+    result))
 
 (defmethod print-object ((hash-set hash-set) stream)
   (print-unreadable-object (hash-set stream :identity t :type t)
@@ -91,4 +107,3 @@ nil)
            (let ((value (nth-value 1 (iterator))))
              (format t "~a, " value)))
       (format t "~a}" (nth-value 1 (iterator))))))
-   

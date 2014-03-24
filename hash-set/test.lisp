@@ -30,14 +30,24 @@
     (is (= 90 (hs-count hash-set)))))
 
 (test hs-equality
-  (let ((hs-a (list-to-hs (alexandria:iota 10)))
-        (hs-b (list-to-hs (alexandria:iota 10)))
-        (hs-c (list-to-hs (alexandria:iota 20)))
-        (hs-d (list-to-hs (alexandria:iota 10 :start 10))))
+  (let* ((hs-a (list-to-hs (alexandria:iota 10)))
+         (hs-b (list-to-hs (alexandria:iota 10)))
+         (hs-c (list-to-hs (alexandria:iota 20)))
+         (hs-d (list-to-hs (alexandria:iota 10 :start 10)))
+         (hs-e (list-to-hs '(a b c d e)))
+         (hs-f (list-to-hs '(e d c b a)))
+         (hs-a-copy (hs-copy hs-a)))
     (is (hs-equal hs-a hs-b))
+    (is (hs-equal hs-e hs-f))
     (is-false (hs-equal hs-b hs-c))
-    (is-false (hs-equal hs-c hs-d))))
+    (is-false (hs-equal hs-c hs-d))
+    (is (hs-equal hs-a hs-a-copy))))
 
+(test hs-difference
+  (let ((hs-a (list-to-hs (alexandria:iota 15))))
+    (is (hs-equal
+         (hs-difference hs-a (list-to-hs '(10 11 12 13 14)))
+         (list-to-hs (alexandria:iota 10))))))
         
         
         
