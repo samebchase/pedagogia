@@ -48,11 +48,11 @@
     (is (hs-equal
          (hs-difference hs-a (list-to-hs '(10 11 12 13 14)))
          (list-to-hs (alexandria:iota 10))))))
-        
-        
-        
-      
-    
+
+(test hs-symmetric-difference
+  (is (hs-equal (list-to-hs (alexandria:iota 6 :start 1))
+                (hs-symmetric-difference (list-to-hs '(1 2 3))
+                                         (list-to-hs '(4 5 6)))))) 
 
     
     

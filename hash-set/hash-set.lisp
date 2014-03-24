@@ -92,8 +92,8 @@ nil)
     result))
 
 (defun hs-symmetric-difference (hs-a hs-b)
-  (let ((result (make-instance 'hash-set)))
-    result))
+  (hs-union (hs-difference hs-a hs-b)
+            (hs-difference hs-b hs-a)))
 
 (defmethod print-object ((hash-set hash-set) stream)
   (print-unreadable-object (hash-set stream :identity t :type t)
@@ -101,9 +101,11 @@ nil)
 
 (defun hs-pretty-print (hash-set)
   (let ((count (hs-count hash-set)))
-    (with-hash-table-iterator (iterator (table hash-set))
-      (format t "{")
-      (loop for i from 1 to (1- count) do
-           (let ((value (nth-value 1 (iterator))))
-             (format t "~a, " value)))
-      (format t "~a}" (nth-value 1 (iterator))))))
+    (if (= count 0)
+        (format t "{}")
+        (with-hash-table-iterator (iterator (table hash-set))
+          (format t "{")
+          (loop for i from 1 to (1- count) do
+               (let ((value (nth-value 1 (iterator))))
+                 (format t "~a, " value)))
+          (format t "~a}" (nth-value 1 (iterator)))))))
