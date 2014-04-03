@@ -6,8 +6,7 @@ int main() {
     int b[] = {10, 1234, 20, 4321, 30};
     int c[] = {11, 12, 13, 14, 15};
     int d[] = {8, 7, 6, 5, 4, 3};
-    int e[] = {};
-
+  
     printf("Left rotation:\n");
 
     print_array(a, 5);
@@ -40,7 +39,6 @@ int main() {
 
     printf("Recursive procedure to print array:\n");
     print_array_rec(d, 5);
-    print_array_rec(e, 0);
-
+  
     return 0;
 }

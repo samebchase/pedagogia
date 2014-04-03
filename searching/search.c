@@ -32,7 +32,7 @@ int linear_search_rec(int *array, size_t length, int element) {
 int binary_search(int *array, int element,
                   size_t start_index, size_t end_index) {
 
-    int middle_index   = (end_index - start_index)/2 + start_index;
+    int middle_index   = (end_index - start_index) / 2  +  start_index;
     int middle_element = array[middle_index];
 
     if (element == middle_element) {

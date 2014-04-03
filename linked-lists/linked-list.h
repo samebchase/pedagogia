@@ -11,11 +11,6 @@ typedef struct _singly_linked_list {
     singly_linked_node *head;
 } singly_linked_list;
 
-typedef struct _generic_container_node {
-    void *data;
-    struct _generic_container_node *next;
-} generic_container_node;
-
 singly_linked_node* new_singly_linked_node();
 
 singly_linked_list* new_singly_linked_list();

@@ -5,7 +5,7 @@
 int main() {
 
     int a[] = {34, 65, 745, -70, 435, 78, 12, -4, 5, 123};
-    int e[] = {};
+    // int e[] = {};
 
     int search[] = {-70, 42};
 
@@ -18,10 +18,10 @@ int main() {
         printf("Element %d is not in the array.\n", search[1]);
     }
 
-    printf("Searching for element in empty array: %d\n", search[1]);
-    if (linear_search(e, 0, search[1]) < 0) {
-        printf("Element %d is not in the array.\n", search[1]);
-    }
+    /* printf("Searching for element in empty array: %d\n", search[1]); */
+    /* if (linear_search(e, 0, search[1]) < 0) { */
+    /*     printf("Element %d is not in the array.\n", search[1]); */
+    /* } */
 
     printf("Recursively:\n");
 
@@ -33,10 +33,10 @@ int main() {
         printf("Element %d is not in the array.\n", search[1]);
     }
 
-    printf("Searching for element in empty array: %d\n", search[1]);
-    if (linear_search_rec(e, 0, search[1]) < 0) {
-        printf("Element %d is not in the array.\n", search[1]);
-    }
+    /* printf("Searching for element in empty array: %d\n", search[1]); */
+    /* if (linear_search_rec(e, 0, search[1]) < 0) { */
+    /*     printf("Element %d is not in the array.\n", search[1]); */
+    /* } */
 
     printf("Binary search:\n");
 

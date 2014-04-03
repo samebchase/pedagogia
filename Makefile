@@ -1,5 +1,5 @@
 CC=clang
-OPTIONS=-g -Wall -pedantic -std=c99
+OPTIONS=-g -Wall -pedantic -std=c99 -Wgnu-empty-initializer -Wzero-length-array
 
 AR=arrays
 L=lib
