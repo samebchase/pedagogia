@@ -15,8 +15,3 @@
 (defmethod print-object ((node coloured-node) stream)
   (print-unreadable-object (node stream :type t :identity t)
     (format stream "Label: ~a, Colour: ~a" (label node) (colour node))))
-
-(defclass directed-edge ()
-  ((start-node :accessor start-node :initarg :start-node)
-   (end-node :accessor end-node :initarg :end-node))
-  (:documentation "A basic edge from two nodes."))

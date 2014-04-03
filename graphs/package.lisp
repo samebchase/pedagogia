@@ -3,7 +3,8 @@
 (in-package :cl-user)
 
 (defpackage #:graphs
-  (:use #:cl))
+  (:use #:cl
+        #:hash-set))
 
 (defpackage #:graph-test
   (:use #:cl

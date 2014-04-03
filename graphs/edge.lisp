@@ -7,13 +7,16 @@
 
 (defmethod print-object ((edge directed-edge) stream)
   (print-unreadable-object (edge stream :type t :identity t)
-    (format stream "Start: ~a, End: ~a"
+    (format stream "{~a, ~a}"
             (start-node edge) (end-node edge))))            
 
-(defclass weighted-directed-edge (directed-edge)
-  ((weight :accessor weight :initarg :weight))
-  (:documentation "A weighted edge."))
-
-(defclass labeled-edge (directed-edge)
+(defclass labeled-directed-edge (directed-edge)
   ((label :accessor label :initarg :label))
   (:documentation "A labeled edge."))
+
+(defmethod print-object ((edge labeled-directed-edge) stream)
+  (print-unreadable-object (edge stream :type t :identity t)
+    (format stream "{~a -(~a)-> ~a}"
+            (label (start-node edge))
+            (label edge)
+            (label (end-node edge)))))

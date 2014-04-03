@@ -1,9 +1,9 @@
 ;;;; graphs.asd
 
-(defpackage :edit-distance-system
+(defpackage :graphs-system
   (:use :cl :asdf))
 
-(in-package :edit-distance-system)
+(in-package :graphs-system)
 
 (defsystem #:graphs
   :serial t
@@ -12,7 +12,8 @@
   :license "Unknown"
   :depends-on (#:alexandria
                #:optima
-               #:fiveam)
+               #:fiveam
+               #:hash-set)
   :components ((:file "package")
                (:file "node")
                (:file "edge")
