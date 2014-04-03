@@ -6,17 +6,18 @@
   (:documentation "A basic edge from two nodes."))
 
 (defmethod print-object ((edge directed-edge) stream)
-  (print-unreadable-object (edge stream :type t :identity t)
-    (format stream "{~a, ~a}"
-            (start-node edge) (end-node edge))))            
+  (print-unreadable-object (edge stream :type t)
+    (format stream "(~a) --> (~a)"
+            (start-node edge)
+            (end-node edge))))
 
-(defclass labeled-directed-edge (directed-edge)
-  ((label :accessor label :initarg :label))
-  (:documentation "A labeled edge."))
+(defclass weighted-directed-edge (directed-edge)
+  ((weight :accessor weight :initarg :weight))
+  (:documentation "A weighted edge."))
 
-(defmethod print-object ((edge labeled-directed-edge) stream)
-  (print-unreadable-object (edge stream :type t :identity t)
-    (format stream "{~a -(~a)-> ~a}"
+(defmethod print-object ((edge weighted-directed-edge) stream)
+  (print-unreadable-object (edge stream :type t)
+    (format stream "(~a) --/~a/--> (~a)"
             (label (start-node edge))
-            (label edge)
+            (weight edge)
             (label (end-node edge)))))
