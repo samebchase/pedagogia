@@ -1,5 +1,19 @@
 #include "array.h"
 
+bool array_equal(int *array_a, size_t a_length, int *array_b, size_t b_length) {
+    if (a_length != b_length) {
+        return false;
+    }
+    else {
+        for (int idx = 0; idx < a_length; ++idx) {
+            if (array_a[idx] != array_b[idx]) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
 void print_array(int *array, int length) {
     printf("[");
     
