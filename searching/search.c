@@ -32,8 +32,8 @@ int linear_search_rec(int *array, size_t length, int element) {
 int binary_search(int *array, int element,
                   size_t start_index, size_t end_index) {
 
-    int middle_index   = (end_index - start_index) / 2  +  start_index;
-    int middle_element = array[middle_index];
+    size_t middle_index   = (end_index - start_index) / 2  +  start_index;
+    size_t middle_element = array[middle_index];
 
     if (element == middle_element) {
         return middle_index;
@@ -44,10 +44,10 @@ int binary_search(int *array, int element,
     }
 
     if (element < middle_element) {
-        binary_search(array, element, start_index, middle_index - 1);
+        return binary_search(array, element, start_index, middle_index - 1);
     }
 
     else if (element > middle_element) {
-        binary_search(array, element, middle_index + 1, end_index);
+        return binary_search(array, element, middle_index + 1, end_index);
     }
 }
