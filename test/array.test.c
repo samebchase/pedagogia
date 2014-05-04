@@ -6,7 +6,7 @@ int main() {
     int b[] = {10, 1234, 20, 4321, 30};
     int c[] = {11, 12, 13, 14, 15};
     int d[] = {8, 7, 6, 5, 4, 3};
-  
+
     printf("Left rotation:\n");
 
     print_array(a, 5);
