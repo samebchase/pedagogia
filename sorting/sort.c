@@ -62,33 +62,21 @@ int* copy_array(int *array, size_t length) {
     return copied_array;
 }
 
-bool less_than(int a, int b) {
-    return a < b;
-}
-
-bool greater_than(int a, int b) {
-    return a > b;
-}
-
-int extremal_element(int *array, size_t length, bool (*ordering_relation)(int, int)) {
-    int extreme = array[0];
-    int current_element = extreme;
+void set_extremal_elements(int *array, size_t length, int *max, int *min) {
+    int current_element, current_maximum, current_minimum;
+    current_maximum = current_minimum = array[0];
 
     for (int idx = 0; idx < length; ++idx) {
         current_element = array[idx];
-        if (ordering_relation(current_element, extreme)) {
-            extreme = current_element;
+        if (current_element > current_maximum) {
+            current_maximum = current_element;
+        }
+        if (current_element < current_minimum) {
+            current_minimum = current_element;
         }
     }
-    return extreme;
-}
-
-int maximum_element(int *array, size_t length) {
-    return extremal_element(array, length, greater_than);
-}
-
-int minimum_element(int *array, size_t length) {
-    return extremal_element(array, length, less_than);
+    *max = current_maximum;
+    *min = current_minimum;
 }
 
 size_t number_in_range_to_index(int number, int minimum, int maximum) {
@@ -104,8 +92,9 @@ int index_to_number_in_range(size_t idx, int minimum, int maximum) {
 }
 
 void counting_sort(int *array, size_t length) {
-    int minimum = minimum_element(array, length);
-    int maximum = maximum_element(array, length);
+
+    int maximum, minimum;
+    set_extremal_elements(array, length, &maximum, &minimum);
 
     int counting_array_length = maximum - minimum + 1;
     int *counting_array = calloc(counting_array_length, sizeof(int));
@@ -127,35 +116,29 @@ void counting_sort(int *array, size_t length) {
     }
 }
 
-int* merge_sort_helper_rec(int *array, size_t start_idx, size_t end_idx) {
+int* merge_sort_aux(int *array, size_t start_idx, size_t end_idx) {
     if (end_idx - start_idx + 1 <= 1) {
         return array;
     }
-    else if (end_idx - start_idx + 1 == 2) {
-        if (array[start_idx] > array[end_idx]) {
-            swap(&array[start_idx], &array[end_idx]);
-        }
-        return array;
-    }
     else {
-        size_t mid_idx = start_idx + (end_idx - start_idx) / 2;
-
+        size_t mid_idx = (end_idx - start_idx + 1) / 2;
         size_t left_subarray_length  = mid_idx - start_idx;
         size_t right_subarray_length = end_idx - mid_idx + 1;
 
-        int *left_subarray  = copy_array(array, left_subarray_length);
-        int *right_subarray = copy_array(array + mid_idx, right_subarray_length);
-
-        left_subarray = merge_sort_helper_rec(left_subarray, 0, left_subarray_length - 1);
-        right_subarray = merge_sort_helper_rec(right_subarray, 0, right_subarray_length - 1);
+        int *left_subarray  = merge_sort_aux(array, 0, left_subarray_length - 1);
+        int *right_subarray = merge_sort_aux(array + mid_idx, 0, right_subarray_length - 1);
 
         return merge_arrays(left_subarray,  left_subarray_length,
                             right_subarray, right_subarray_length);
     }
 }
 
-int* merge_sort(int *array, size_t length) {
-    return merge_sort_helper_rec(array, 0, length - 1);
+void merge_sort(int *array, size_t length) {
+    int *sorted_array = merge_sort_aux(array, 0, length - 1);
+    for (size_t idx = 0; idx < length; ++idx) {
+        array[idx] = sorted_array[idx];
+    }
+    free(sorted_array);
 }
 
 int* merge_arrays(int *array_a, size_t a_length, int *array_b, size_t b_length) {

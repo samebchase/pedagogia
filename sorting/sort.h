@@ -13,7 +13,7 @@ void bubble_sort(int *array, size_t length);
 
 int* merge_arrays(int *array_a, size_t a_length, int *array_b, size_t b_length);
 
-int* merge_sort(int *array, size_t length);
+void merge_sort(int *array, size_t length);
 
 void counting_sort(int *array, size_t length);
 
