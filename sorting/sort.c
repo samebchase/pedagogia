@@ -127,16 +127,35 @@ void counting_sort(int *array, size_t length) {
     }
 }
 
-void merge_sort_helper_rec(int *array, size_t start_idx, size_t end_idx) {
-    int *copied_array = copy_array(array, end_idx - start_idx + 1);
-    size_t mid_idx = start_idx + (end_idx - start_idx) / 2;
+int* merge_sort_helper_rec(int *array, size_t start_idx, size_t end_idx) {
+    if (end_idx - start_idx + 1 <= 1) {
+        return array;
+    }
+    else if (end_idx - start_idx + 1 == 2) {
+        if (array[start_idx] > array[end_idx]) {
+            swap(&array[start_idx], &array[end_idx]);
+        }
+        return array;
+    }
+    else {
+        size_t mid_idx = start_idx + (end_idx - start_idx) / 2;
 
-    array = merge_arrays(copied_array, mid_idx - start_idx + 1,
-                         copied_array + mid_idx, end_idx - mid_idx + 1);
+        size_t left_subarray_length  = mid_idx - start_idx;
+        size_t right_subarray_length = end_idx - mid_idx + 1;
+
+        int *left_subarray  = copy_array(array, left_subarray_length);
+        int *right_subarray = copy_array(array + mid_idx, right_subarray_length);
+
+        left_subarray = merge_sort_helper_rec(left_subarray, 0, left_subarray_length - 1);
+        right_subarray = merge_sort_helper_rec(right_subarray, 0, right_subarray_length - 1);
+
+        return merge_arrays(left_subarray,  left_subarray_length,
+                            right_subarray, right_subarray_length);
+    }
 }
 
-void merge_sort(int *array, size_t length) {
-    merge_sort_helper_rec(array, 0, length - 1);
+int* merge_sort(int *array, size_t length) {
+    return merge_sort_helper_rec(array, 0, length - 1);
 }
 
 int* merge_arrays(int *array_a, size_t a_length, int *array_b, size_t b_length) {
@@ -163,17 +182,11 @@ int* merge_arrays(int *array_a, size_t a_length, int *array_b, size_t b_length) 
     // merged_array and copy the remaining subarray of the array that
     // has not been copied into merged_array
 
-    if (b_idx < b_length) {
-        m_idx += b_idx;
-        while (b_idx < b_length) {
-            merged_array[m_idx++] = array_b[b_idx++];
-        }
+    while (b_idx < b_length) {
+        merged_array[m_idx++] = array_b[b_idx++];
     }
-    if (a_idx < a_length) {
-        m_idx += a_idx;
-        while (a_idx < a_length) {
-            merged_array[m_idx++] = array_a[a_idx++];
-        }
+    while (a_idx < a_length) {
+        merged_array[m_idx++] = array_a[a_idx++];
     }
 
     return merged_array;

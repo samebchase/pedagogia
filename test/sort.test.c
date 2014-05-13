@@ -22,32 +22,56 @@ int main() {
     int c2[] = {34, -2, 5, -5, -6, 0, -1};
     int c3[] = {-2, 2, -5, 4, -5, -8, 13, 3, 0, 3, -1};
 
+    int l1[] = {6, 5, 3, 1, 21, 2, 9, 3, 4};
+    int l2[] = {34, -2, 5, -5, -6, 0, -1};
+    int l3[] = {-2, 2, -5, 4, -5, -8, 13, 3, 0, 3, -1};
+
+    printf("Merging: \n");
+    print_array(b1, 4);
+    print_array(b2, 4);
+    printf("gives: ");
+    int *m2 = merge_arrays(b1, 4, b2, 4);
+    print_array(m2, 8);
+
+    printf("Merging: \n");
+    print_array(a1, 5);
+    print_array(a2, 6);
+    printf("gives: \n");
+    int *m1 = merge_arrays(a1, 5, a2, 6);
+    print_array(m1, 11);
+    printf("\n");
+
+    int mer3[] = {2, 21};
+    int mer4[] = {3, 4, 9};
+
+    print_array(merge_arrays(mer3, 2, mer4, 3), 5);
+
+    int mer5[] = {-6, -4, -1, 0, 13, 18};
+    int mer6[] = {-4, -3, -2, -1, 3, 5};
+
+    print_array(merge_arrays(mer5, 6, mer6, 6), 12);
+    printf("\n");
+
+    printf("Merge sort:\n");
+    print_array(l1, 9);
+    int *mr1 = merge_sort(l1, 9);
+    print_array(mr1, 9);
+    print_array(l2, 7);
+    print_array(merge_sort(l2, 7), 7);
+    print_array(l3, 11);
+    print_array(merge_sort(l3, 11), 11);
+    printf("\n");
+
     printf("Counting sort:\n");
     test_array_sort(counting_sort, c1, 9);
     test_array_sort(counting_sort, c2, 7);
     test_array_sort(counting_sort, c3, 11);
     printf("\n");
 
-    print_array(b1, 4);
-    printf("merged with: \n");
-    print_array(b2, 4);
-    printf("gives: \n");
-    int *m2 = merge_arrays(b1, 4, b2, 4);
-    print_array(m2, 8);
-
-    print_array(a1, 5);
-    printf("merged with: \n");
-    print_array(a2, 6);
-    int *m1 = merge_arrays(a1, 5, a2, 6);
-    printf("gives: \n");
-    print_array(m1, 11);
-    printf("\n");
-
     printf("Insertion sort:\n");
     test_array_sort(insertion_sort, a, 10);
     test_array_sort(insertion_sort, b, 10);
     printf("\n");
-
 
     int d[] = {5, -6, 67, -3, 0, 78, 123, -8, 42, -1};
     int e[] = {123, -5, 0, 4, 69, -87, -2, 89, -12, -2};
