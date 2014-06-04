@@ -6,6 +6,7 @@ L=lib
 LL=linked-lists
 SE=searching
 SO=sorting
+STR=strings
 T=test
 U=util
 
@@ -30,6 +31,13 @@ lib/array.o: $(AR)/array.h $(AR)/array.c $(L)/util.o
 
 test/array.out: $(T)/array.test.c $(L)/array.o $(L)/util.o
 	$(CC) $(OPTIONS) -o $(T)/array.out $(L)/array.o $(L)/util.o $(T)/array.test.c -lm
+
+
+lib/strings.o: $(STR)/strings.h $(STR)/strings.c $(L)/util.o
+	$(CC) $(OPTIONS) -c $(STR)/strings.c -o $(L)/strings.o
+
+test/strings.out: $(T)/strings.test.c $(L)/strings.o $(L)/util.o
+	$(CC) $(OPTIONS) -o $(T)/strings.out $(L)/strings.o $(L)/util.o $(T)/strings.test.c -lm
 
 
 lib/sort.o: $(SO)/sort.h $(SO)/sort.c $(L)/array.o

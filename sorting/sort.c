@@ -25,29 +25,29 @@ int minimum_element_index(int *array, size_t length,
     assert(end_index < length);
     int min_index = start_index;
 
-    for (size_t i = start_index; i <= end_index; ++i) {
-        if (array[i] < array[min_index]) {
-            min_index = i;
+    for (size_t idx = start_index; idx <= end_index; ++idx) {
+        if (array[idx] < array[min_index]) {
+            min_index = idx;
         }
     }
-
     return min_index;
 }
 
 void selection_sort(int *array, size_t length) {
-    size_t i, min_index;
-    for (i = 0; i < length - 1; ++i) {
-        min_index = minimum_element_index(array, length, i, length - 1);
-        swap(&array[i], &array[min_index]);
+    size_t idx, min_index;
+    for (idx = 0; idx < length - 1; ++idx) {
+        min_index = minimum_element_index(array, length, idx, length - 1);
+        swap(&array[idx], &array[min_index]);
     }
 }
 
 void bubble_sort(int *array, size_t length) {
-    for (bool swaps_have_occured = true; swaps_have_occured; ) {
+    bool swaps_have_occured = true;
+    while (swaps_have_occured) {
         swaps_have_occured = false;
-        for (size_t i = 0; i < length - 1; ++i) {
-            if (array[i] > array[i + 1]) {
-                swap(&array[i], &array[i + 1]);
+        for (size_t idx = 0; idx < length - 1; ++idx) {
+            if (array[idx] > array[idx + 1]) {
+                swap(&array[idx], &array[idx + 1]);
                 swaps_have_occured = true;
             }
         }
