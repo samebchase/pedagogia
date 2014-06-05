@@ -25,3 +25,25 @@
            do (rotatef (aref vector jdx)
                        (aref vector (1- jdx)))))
   vector)
+
+(defun index-of-lower-bound-in-range (vector ordering-fn
+                                      &key start end)
+  (let ((idx-lower-bound start)
+        (current-lower-bound (aref vector start)))
+    (loop for idx from start upto end
+       do (let ((current-elt (aref vector idx)))
+            (when (funcall ordering-fn
+                           current-elt
+                           current-lower-bound)
+              (setf current-lower-bound current-elt)
+              (setf idx-lower-bound idx))))
+    idx-lower-bound))
+
+(defun selection-sort (vector comparison-function)
+  (loop for idx below (1- (length vector))
+     for idx-lower-bound = (index-of-lower-bound-in-range
+                            vector comparison-function
+                            :start idx :end (1- (length vector)))
+     do (rotatef (aref vector idx-lower-bound)
+                 (aref vector idx)))
+  vector)
