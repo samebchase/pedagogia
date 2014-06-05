@@ -3,6 +3,7 @@
   (:use #:cl)
   (:export #:insertion-sort
            #:selection-sort
+           #:bubble-sort
            #:merge-sort
            #:quicksort
            #:counting-sort

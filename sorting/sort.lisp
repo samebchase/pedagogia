@@ -47,3 +47,17 @@
      do (rotatef (aref vector idx-lower-bound)
                  (aref vector idx)))
   vector)
+
+(defun bubble-sort (vector comparison-function)
+  (let ((swaps-have-occured t))
+    (loop while swaps-have-occured
+       do (setf swaps-have-occured nil)
+         (loop for idx below (1- (length vector))
+            when (not (funcall comparison-function
+                               (aref vector idx)
+                               (aref vector (1+ idx))))
+            do (rotatef (aref vector idx)
+                        (aref vector (1+ idx)))
+              (setf swaps-have-occured t))))
+  vector)
+
