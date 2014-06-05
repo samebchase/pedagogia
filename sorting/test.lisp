@@ -32,35 +32,19 @@
           #(4 21 4 123 1984 5 6) #'>
           :start 0 :end 6))))
 
-(test insertion-sort
-  (is-true  (pedagogia.sort::sortedp
-             (insertion-sort
-              #(5 7 2 4 7 5 54 786 323 54 7623 124 561 5 76 1 5) #'<=) #'<=))
-  (is-true (pedagogia.sort::sortedp
-             (insertion-sort
-              #(5 7 2 4 7 5 54 786 323 54 7623 124 561 5 76 1 5) #'>=) #'>=))
-  (is-true (pedagogia.sort::sortedp
-            (insertion-sort (pedagogia.sort::random-vector 1000) #'<=) #'<=)))
+(defmacro test-sorting-algorithm (sorting-alg)
+  `(test ,sorting-alg
+     (is-true (pedagogia.sort::sortedp
+               (,sorting-alg
+                #(5 7 2 4 7 5 54 786 323 54 7623 124 561 5 76 1 5) #'<=) #'<=))
+     (is-true (pedagogia.sort::sortedp
+               (,sorting-alg
+                #(5 7 2 4 7 5 54 786 323 54 7623 124 561 5 76 1 5) #'>=) #'>=))
+     (is-true (pedagogia.sort::sortedp
+               (,sorting-alg (pedagogia.sort::random-vector 1000) #'<=) #'<=))))
 
-(test selection-sort
-  (is-true  (pedagogia.sort::sortedp
-             (selection-sort
-              #(5 7 2 4 7 5 54 786 323 54 7623 124 561 5 76 1 5) #'<=) #'<=))
-  (is-true (pedagogia.sort::sortedp
-             (selection-sort
-              #(5 7 2 4 7 5 54 786 323 54 7623 124 561 5 76 1 5) #'>=) #'>=))
-  (is-true  (pedagogia.sort::sortedp
-             (selection-sort
-              (pedagogia.sort::random-vector 1000) #'<=) #'<=)))
+(test-sorting-algorithm bubble-sort)
 
-(test bubble-sort
-  (is-true  (pedagogia.sort::sortedp
-             (bubble-sort
-              #(5 7 2 4 7 5 54 786 323 54 7623 124 561 5 76 1 5) #'<=) #'<=))
-  (is-true (pedagogia.sort::sortedp
-             (bubble-sort
-              #(5 7 2 4 7 5 54 786 323 54 7623 124 561 5 76 1 5) #'>=) #'>=))
-  (is-true  (pedagogia.sort::sortedp
-             (bubble-sort
-              (pedagogia.sort::random-vector 1000) #'<=) #'<=)))
+(test-sorting-algorithm insertion-sort)
 
+(test-sorting-algorithm selection-sort)
