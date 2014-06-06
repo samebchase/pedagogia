@@ -48,3 +48,5 @@
 (test-sorting-algorithm insertion-sort)
 
 (test-sorting-algorithm selection-sort)
+
+(test-sorting-algorithm merge-sort)

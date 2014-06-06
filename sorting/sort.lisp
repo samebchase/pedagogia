@@ -6,20 +6,20 @@
        do (setf (aref vector idx) (random size)))
     vector))
 
-(defun sortedp (vector comparison-function)
+(defun sortedp (vector ordering-fn)
   (let ((result t))
     (loop for idx below (1- (length vector))
-       do (when (not (funcall comparison-function
+       do (when (not (funcall ordering-fn
                               (aref vector idx)
                               (aref vector (1+ idx))))
             (setf result nil)
             (return)))
     result))
 
-(defun insertion-sort (vector comparison-function)
+(defun insertion-sort (vector ordering-fn)
   (loop for idx from 1 below (length vector)
      do (loop for jdx from idx above 0
-           when (funcall comparison-function
+           when (funcall ordering-fn
                          (aref vector jdx)
                          (aref vector (1- jdx)))
            do (rotatef (aref vector jdx)
@@ -39,25 +39,39 @@
               (setf idx-lower-bound idx))))
     idx-lower-bound))
 
-(defun selection-sort (vector comparison-function)
+(defun selection-sort (vector ordering-fn)
   (loop for idx below (1- (length vector))
      for idx-lower-bound = (index-of-lower-bound-in-range
-                            vector comparison-function
+                            vector ordering-fn
                             :start idx :end (1- (length vector)))
      do (rotatef (aref vector idx-lower-bound)
                  (aref vector idx)))
   vector)
 
-(defun bubble-sort (vector comparison-function)
+(defun bubble-sort (vector ordering-fn)
   (let ((swaps-have-occured t))
     (loop while swaps-have-occured
        do (setf swaps-have-occured nil)
          (loop for idx below (1- (length vector))
-            when (not (funcall comparison-function
+            when (not (funcall ordering-fn
                                (aref vector idx)
                                (aref vector (1+ idx))))
             do (rotatef (aref vector idx)
                         (aref vector (1+ idx)))
               (setf swaps-have-occured t))))
   vector)
+
+(defun merge-sort (vector ordering-fn)
+  (labels ((merge-sort-aux (vector-aux)
+             (if (<= (length vector-aux) 1)
+                 vector-aux
+                 (let* ((start-idx 0)
+                        (end-idx (1- (length vector-aux)))
+                        (mid-idx (truncate (/ (- end-idx (1+ start-idx)) 2)))
+                        (left-subvector   (subseq vector-aux   start-idx  (1+ mid-idx)))
+                        (right-subvector  (subseq vector-aux (1+ mid-idx) (1+ end-idx))))
+                   (merge 'vector
+                          (merge-sort-aux left-subvector)
+                          (merge-sort-aux right-subvector) ordering-fn)))))
+    (merge-sort-aux vector)))
 
