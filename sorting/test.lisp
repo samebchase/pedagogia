@@ -32,6 +32,16 @@
           #(4 21 4 123 1984 5 6) #'>
           :start 0 :end 6))))
 
+(test extremal-elements
+  (is (equal '(-4 6) (multiple-value-list (pedagogia.sort::extremal-elements
+                                           #(2 3 6 -3 4 -4) #'<=))))
+  (is (equal '(6 -4) (multiple-value-list (pedagogia.sort::extremal-elements
+                                           #(2 3 6 -3 4 -4) #'>=))))
+  (is (equal '(1 3465) (multiple-value-list (pedagogia.sort::extremal-elements
+                                             #(1 3 5 6 78 34 2 34 54 3465 3246) #'<=))))
+  (is (equal '(3465 1) (multiple-value-list (pedagogia.sort::extremal-elements
+                                             #(1 3 5 6 78 34 2 34 54 3465 3246) #'>=)))))
+
 (defmacro test-sorting-algorithm (sorting-alg)
   `(test ,sorting-alg
      (is-true (pedagogia.sort::sortedp
@@ -41,7 +51,7 @@
                (,sorting-alg
                 #(5 7 2 4 7 5 54 786 323 54 7623 124 561 5 76 1 5) #'>=) #'>=))
      (is-true (pedagogia.sort::sortedp
-               (,sorting-alg (pedagogia.sort::random-vector 1000) #'<=) #'<=))))
+               (,sorting-alg (pedagogia.sort::random-array 1000) #'<=) #'<=))))
 
 (test-sorting-algorithm bubble-sort)
 
@@ -50,3 +60,13 @@
 (test-sorting-algorithm selection-sort)
 
 (test-sorting-algorithm merge-sort)
+
+(test counting-sort
+  (is-true (pedagogia.sort::sortedp
+            (counting-sort
+             #(5 7 2 4 7 5 54 786 323 54 7623 124 561 5 76 1 5)) #'<=))
+  (is-true (pedagogia.sort::sortedp
+            (counting-sort
+             #(5 7 2 4 7 5 54 786 323 54 7623 124 561 5 76 1 5)) #'<=))
+  (is-true (pedagogia.sort::sortedp
+            (counting-sort (pedagogia.sort::random-array 1000)) #'<=)))
