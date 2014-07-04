@@ -96,7 +96,8 @@
                  (<= number upper-bound)))
     number))
 
-(defun counting-sort (array)
+(defun counting-sort (array ordering-fn)
+  (declare (ignore ordering-fn))
   (multiple-value-bind (lower-bound upper-bound)
       (extremal-elements array #'<=)
     (let* ((array-length (length array))
@@ -120,3 +121,8 @@
                    (incf array-idx))))))
   array)
 
+(defun partition (array idx)
+  nil)
+
+(defun quick-sort (array ordering-fn)
+  array)
