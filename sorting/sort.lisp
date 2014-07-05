@@ -121,8 +121,29 @@
                    (incf array-idx))))))
   array)
 
-(defun partition (array idx)
-  nil)
+(defun %parent-idx (idx)
+  (truncate (floor (1- idx) 2)))
 
-(defun quick-sort (array ordering-fn)
-  array)
+(defun %left-child-idx (idx)
+  (1+ (* 2 idx)))
+
+(defun %right-child-idx (idx)
+  (* 2 (1+ idx)))
+
+(defun %heapify (array idx max-idx)
+  (let* ((left-child-idx (%left-child-idx idx))
+        (right-child-idx (%right-child-idx idx))
+        (idx-largest (if (and (< left-child-idx max-idx)
+                          (> (aref array left-child-idx)
+                             (aref array idx)))
+                     left-child-idx
+                     idx)))
+
+    (when (and (< right-child-idx max-idx)
+               (> (aref array right-child-idx)
+                  (aref array idx-largest)))
+      (setf idx-largest right-child-idx))
+
+    (when (/= idx-largest idx)
+      (rotatef (aref array idx) (aref array idx-largest))
+      (%heapify array idx-largest max-idx))))
