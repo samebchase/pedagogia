@@ -14,6 +14,20 @@
   (is-true  (pedagogia.sort::sortedp #(1 2 2 3)        #'<=))
   (is-false (pedagogia.sort::sortedp #(1 2 3 4 2 5)    #'<=)))
 
+(test %parent-idx
+  (is-true (= 0 (pedagogia.sort::%parent-idx 1)))
+  (is-true (= 0 (pedagogia.sort::%parent-idx 1)))
+  (is-true (= 3 (pedagogia.sort::%parent-idx 7)))
+  (is-true (= 3 (pedagogia.sort::%parent-idx 8))))
+
+(test %left-child-idx
+  (is-true (= 1 (pedagogia.sort::%left-child-idx 0)))
+  (is-true (= 7 (pedagogia.sort::%left-child-idx 3))))
+
+(test %right-child-idx
+  (is-true (= 2 (pedagogia.sort::%right-child-idx 0)))
+  (is-true (= 8 (pedagogia.sort::%right-child-idx 3))))
+
 (test index-of-lower-bound-in-range
   (is (= 3
          (pedagogia.sort::index-of-lower-bound-in-range
@@ -43,7 +57,7 @@
                                              #(1 3 5 6 78 34 2 34 54 3465 3246) #'>=)))))
 
 (defmacro basic-sorting-test (sorting-alg)
-  `(test ,(alexandria:symbolicate 'basic (symbol-name sorting-alg) '-test)
+  `(test ,(alexandria:symbolicate 'basic- (symbol-name sorting-alg) '-test)
      (is-true (pedagogia.sort::sortedp
                (,sorting-alg
                 #(5 7 2 4 7 5 54 786 323 54 7623 124 561 5 76 1 5) #'<=) #'<=))
@@ -63,4 +77,6 @@
 
 (basic-sorting-test counting-sort)
 
-(test partition)
+(basic-sorting-test heap-sort)
+
+
